@@ -137,13 +137,13 @@ public extension Collection where Iterator.Element: Differentiable, Index == Int
             let oldIndex = newEntry.oldIndexes.pop(matching: newIndex)
 
             if let oldIndex = oldIndex {
-                if oldIndex < oldCount {
-                    let newElement = new[newIndex]
-                    let oldElement = old[oldIndex]
-                    if newElement != oldElement {
-                        newEntry.isUpdated = true
-                    }
-                }
+//                if oldIndex < oldCount {
+//                    let newElement = new[newIndex]
+//                    let oldElement = old[oldIndex]
+//                    if newElement != oldElement {
+//                        newEntry.isUpdated = true
+//                    }
+//                }
 
                 if newEntry.oldCount > 0 && newEntry.newCount > 0 {
                     newRecords[newIndex] = .index(oldIndex)
@@ -214,12 +214,17 @@ public extension Collection where Iterator.Element: Differentiable, Index == Int
                 results.append(.insert(newIndex))
                 currentOffset += 1
             case .index(let oldIndex):
-                //            Do we need to keep track of updated indexes?
-                //            if let indexToUpdate = newRecord.index,
-                //               let entry = newRecord.entry,
-                //               entry.isUpdated {
-                //                results.append(.update(indexToUpdate))
-                //            }
+
+                if old[oldIndex] != new[newIndex] {
+                    results.append(.update(oldIndex))
+                }
+
+//                if let indexToUpdate = newRecord.index,
+//                    let entry = newRecord.entry,
+//                    entry.isUpdated {
+//                    results.append(.update(indexToUpdate))
+//                }
+
                 let deleteOffset = deleteOffsets[oldIndex]
                 let insertOffset = insertOffsets[newIndex]
                 if (oldIndex - deleteOffset + insertOffset) != newIndex {
