@@ -177,7 +177,7 @@ public extension Collection where Iterator.Element: Differentiable, Index == Int
 
                 let deleteOffset = deleteOffsets[oldIndex]
                 let insertOffset = insertOffsets[newIndex]
-                if (oldIndex - deleteOffset + insertOffset) != newIndex {
+                if oldIndex != newIndex && (oldIndex - deleteOffset + insertOffset) != newIndex {
                     results.append(.move(oldIndex, newIndex))
                 }
             }
