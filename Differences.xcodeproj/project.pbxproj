@@ -12,6 +12,7 @@
 		57EB6DAA1E0CDC9700E68D16 /* Collection+DifferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB6DA61E0C751900E68D16 /* Collection+DifferencesTests.swift */; };
 		57EB6DAC1E10964200E68D16 /* RangeReplaceableCollection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB6DAB1E10964200E68D16 /* RangeReplaceableCollection+Index.swift */; };
 		57EB6DAF1E109D0900E68D16 /* RangeReplaceableCollection+IndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB6DAD1E109C7D00E68D16 /* RangeReplaceableCollection+IndexTests.swift */; };
+		57EB6DB11E10F58100E68D16 /* String+Differences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB6DB01E10F58100E68D16 /* String+Differences.swift */; };
 		OBJ_21 /* Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Difference.swift */; };
 		OBJ_28 /* DifferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* DifferencesTests.swift */; };
 		OBJ_30 /* Differences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Differences.framework */; };
@@ -33,6 +34,7 @@
 		57EB6DA81E0C9FA700E68D16 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		57EB6DAB1E10964200E68D16 /* RangeReplaceableCollection+Index.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Index.swift"; sourceTree = "<group>"; };
 		57EB6DAD1E109C7D00E68D16 /* RangeReplaceableCollection+IndexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+IndexTests.swift"; sourceTree = "<group>"; };
+		57EB6DB01E10F58100E68D16 /* String+Differences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Differences.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* DifferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferencesTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Differences.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differences.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_15 /* DifferencesTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = DifferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,10 +110,11 @@
 		OBJ_8 /* Differences */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Difference.swift */,
-				57EB6DA81E0C9FA700E68D16 /* Result.swift */,
 				57EB6DA31E0884D800E68D16 /* Collection+Differences.swift */,
+				OBJ_9 /* Difference.swift */,
 				57EB6DAB1E10964200E68D16 /* RangeReplaceableCollection+Index.swift */,
+				57EB6DA81E0C9FA700E68D16 /* Result.swift */,
+				57EB6DB01E10F58100E68D16 /* String+Differences.swift */,
 			);
 			name = Differences;
 			path = Sources;
@@ -185,6 +188,7 @@
 			buildActionMask = 0;
 			files = (
 				57EB6DAC1E10964200E68D16 /* RangeReplaceableCollection+Index.swift in Sources */,
+				57EB6DB11E10F58100E68D16 /* String+Differences.swift in Sources */,
 				57EB6DA41E0884D800E68D16 /* Collection+Differences.swift in Sources */,
 				57EB6DA91E0C9FA700E68D16 /* Result.swift in Sources */,
 				OBJ_21 /* Difference.swift in Sources */,

@@ -24,13 +24,14 @@ class Array_DifferencesTests: XCTestCase {
             ("testFromEmptyToOne", testFromEmptyToOne),
             ("testFromOneToEmpty", testFromOneToEmpty),
             ("testDeleteIndexZero", testDeleteIndexZero),
-            ("testDeleteZeroAndThree", testDeleteZeroAndThree),
+            ("testDeleteIndexesZeroAndThree", testDeleteIndexesZeroAndThree),
             ("testInsertIndexTwo", testInsertIndexTwo),
             ("testInsertIndexesZeroAndThree", testInsertIndexesZeroAndThree),
             ("testDeleteAndInsertIndexZero", testDeleteAndInsertIndexZero),
             ("testMoveIndexZeroToTwo", testMoveIndexZeroToTwo),
             ("testMoveIndexZeroToOne", testMoveIndexZeroToOne),
             ("testMoveThreeIndexesWithDuplicates", testMoveThreeIndexesWithDuplicates),
+            ("testMoveFourIndexes", testMoveFourIndexes),
             ("testInsertDeleteAndMove", testInsertDeleteAndMove),
             ("testUpdateIndexZero", testUpdateIndexZero),
             ("testUpdateIndexOne", testUpdateIndexOne),
@@ -42,6 +43,8 @@ class Array_DifferencesTests: XCTestCase {
             ("testUpdateIndexOneWithDuplicatesAtStartAndEnd", testUpdateIndexOneWithDuplicatesAtStartAndEnd),
             ("testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd", testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd),
             ("testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd", testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd),
+            ("testReplaceCharacterAtIndexZero", testReplaceCharacterAtIndexZero),
+            ("testReplaceLastAsciiCharacterWithFlagEmoji", testReplaceLastAsciiCharacterWithFlagEmoji),
         ]
     }
 
@@ -73,7 +76,7 @@ class Array_DifferencesTests: XCTestCase {
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
-    func testDeleteZeroAndThree() {
+    func testDeleteIndexesZeroAndThree() {
         let old = [2, 0, 1, 3]
         let new = [0, 1]
         let expected: Array<Difference> = [.delete(0), .delete(3)]
@@ -122,9 +125,9 @@ class Array_DifferencesTests: XCTestCase {
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
-    func testMoveIndexes() {
-        let old = Array<Int>(arrayLiteral: 0, 1, 2, 3, 4, 5, 6)
-        let new = Array<Int>(arrayLiteral: 0, 1, 4, 5, 2, 3, 6)
+    func testMoveFourIndexes() {
+        let old = [0, 1, 2, 3, 4, 5, 6]
+        let new = [0, 1, 4, 5, 2, 3, 6]
         let expected: Array<Difference> = [.move(2, 4), .move(3, 5), .move(4, 2), .move(5, 3)]
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
@@ -212,7 +215,6 @@ class Array_DifferencesTests: XCTestCase {
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
-
     func testUpdateIndexOneWithDuplicatesAtStartAndEnd() {
         let old = [
             Test(id: "0", value: 0),
@@ -266,13 +268,19 @@ class Array_DifferencesTests: XCTestCase {
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
-//    Collection doesn't support CharacterView yet
-//    func testInsertCharacterAtIndexZero() {
-//        let old = "Hello".characters
-//        let new = "hello".characters
-//        let expected: Array<Difference> = [.delete(0), .insert(0)]
-//        let results = old.differences(to: new)
-//    }
+    func testReplaceCharacterAtIndexZero() {
+        let old = "Hello".characterArray
+        let new = "hello".characterArray
+        let expected: Array<Difference> = [.delete(0), .insert(0)]
+        _assert(expected: expected, equalsOld: old, diffedWithNew: new)
+    }
+
+    func testReplaceLastAsciiCharacterWithFlagEmoji() {
+        let old = "Hello".characterArray
+        let new = "Hell🇺🇸".characterArray
+        let expected: Array<Difference> = [.delete(4), .insert(4)]
+        _assert(expected: expected, equalsOld: old, diffedWithNew: new)
+    }
 
     // MARK: Helpers
     private func _assert<A: Differentiable>(
