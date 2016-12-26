@@ -144,42 +144,6 @@ public extension Collection where Iterator.Element: Differentiable, Index == Int
             }
         }
 
-        // Step 4
-        var newRecordsCopy = newRecords
-        for (newIndex, newRecord) in newRecordsCopy.enumerated() {
-            let nextNewIndex = newIndex + 1
-            guard nextNewIndex < newRecords.count else { continue }
-            if case .index(let oldIndex) = newRecord {
-                let nextOldIndex = oldIndex + 1
-                guard nextOldIndex < oldRecords.count else { continue }
-                guard case .entry(let nextOldEntry) = oldRecords[nextOldIndex],
-                    case .entry(let nextNewEntry) = newRecords[nextNewIndex]
-                    else { continue }
-                if nextOldEntry == nextNewEntry {
-                    oldRecords[nextOldIndex] = .index(nextNewIndex)
-                    newRecords[nextNewIndex] = .index(nextOldIndex)
-                }
-            }
-        }
-
-        // Step 5
-        newRecordsCopy = newRecords
-        for (newIndex, newRecord) in newRecordsCopy.reversed().enumerated() {
-            let prevNewIndex = newIndex - 1
-            guard prevNewIndex >= 0 else { continue }
-            if case .index(let oldIndex) = newRecord {
-                let prevOldIndex = oldIndex - 1
-                guard prevOldIndex >= 0,
-                    case .entry(let prevOldEntry) = oldRecords[prevOldIndex],
-                    case .entry(let prevNewEntry) = newRecords[prevNewIndex]
-                    else { continue }
-                if prevOldEntry == prevNewEntry {
-                    oldRecords[prevOldIndex] = .index(prevNewIndex)
-                    newRecords[prevNewIndex] = .index(prevOldIndex)
-                }
-            }
-        }
-
         var results = Array<Difference>()
 
         var oldMap = Dictionary<String, Int>()
