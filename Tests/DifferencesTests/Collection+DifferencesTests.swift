@@ -43,6 +43,7 @@ class Array_DifferencesTests: XCTestCase {
             ("testUpdateIndexOneWithDuplicatesAtStartAndEnd", testUpdateIndexOneWithDuplicatesAtStartAndEnd),
             ("testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd", testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd),
             ("testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd", testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd),
+            ("testPerformanceWithOneThousandIntegers", testPerformanceWithOneThousandIntegers),
         ]
     }
 
@@ -266,6 +267,17 @@ class Array_DifferencesTests: XCTestCase {
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
+    // Tests are run unoptimized, which means that increasing the count above 1000
+    // dramatically increases the test run time. However, when run with optimizations
+    // enabled, run time seems to increase linearly, which is expected.
+    func testPerformanceWithOneThousandIntegers() {
+        let old = _randomArray(count: 1000)
+        let new = _randomArray(count: 1000)
+        var result: Result? = nil
+        self.measure { result = old.differences(to: new) }
+        XCTAssertNotNil(result)
+    }
+
     // MARK: Helpers
     private func _assert<A: Differentiable>(
                          expected: Array<Difference>,
@@ -279,5 +291,9 @@ class Array_DifferencesTests: XCTestCase {
         XCTAssertEqual(expected.count, fromOldDiffs.count)
         XCTAssertEqual(Set(expected), Set(toNewDiffs.changes))
         XCTAssertEqual(Set(expected), Set(fromOldDiffs.changes))
+    }
+
+    private func _randomArray(count: Int) -> Array<Int> {
+        return (0..<count).map { _ in Int(arc4random_uniform(10)) }
     }
 }
