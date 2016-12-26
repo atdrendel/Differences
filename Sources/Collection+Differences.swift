@@ -4,17 +4,6 @@ public protocol Differentiable: Equatable {
     var identifier: String { get }
 }
 
-private func == <A: Equatable>(lhs: A?, rhs: A?) -> Bool {
-    switch (lhs, rhs) {
-    case (.some(let left), .some(let right)):
-        return left == right
-    case (.none, .none):
-        return true
-    default:
-        return false
-    }
-}
-
 private struct Indexes: Equatable {
     private var _array = Array<Int>()
 
