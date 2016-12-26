@@ -15,6 +15,7 @@ public struct Result {
     public var moves: Array<Difference> { return _differences.moves }
     public var changes: Array<Difference> { return Array(_differences) }
     public var hasChanges: Bool { return !changes.isEmpty }
+    public var count: Int { return _differences.count }
 
     public var collectionViewDifferences: Array<Difference> {
         var deletes = self.deletes
