@@ -43,8 +43,6 @@ class Array_DifferencesTests: XCTestCase {
             ("testUpdateIndexOneWithDuplicatesAtStartAndEnd", testUpdateIndexOneWithDuplicatesAtStartAndEnd),
             ("testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd", testInsertIndexZeroAndFiveWithDuplicatesAtStartAndEnd),
             ("testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd", testSwapIndexesOneAndTwoWithDuplicatesAtStartAndEnd),
-            ("testReplaceCharacterAtIndexZero", testReplaceCharacterAtIndexZero),
-            ("testReplaceLastAsciiCharacterWithFlagEmoji", testReplaceLastAsciiCharacterWithFlagEmoji),
         ]
     }
 
@@ -265,20 +263,6 @@ class Array_DifferencesTests: XCTestCase {
             Test(id: "0", value: 0)
         ]
         let expected: Array<Difference> = [.move(1, 2), .move(2, 1)]
-        _assert(expected: expected, equalsOld: old, diffedWithNew: new)
-    }
-
-    func testReplaceCharacterAtIndexZero() {
-        let old = "Hello".characterArray
-        let new = "hello".characterArray
-        let expected: Array<Difference> = [.delete(0), .insert(0)]
-        _assert(expected: expected, equalsOld: old, diffedWithNew: new)
-    }
-
-    func testReplaceLastAsciiCharacterWithFlagEmoji() {
-        let old = "Hello".characterArray
-        let new = "Hell🇺🇸".characterArray
-        let expected: Array<Difference> = [.delete(4), .insert(4)]
         _assert(expected: expected, equalsOld: old, diffedWithNew: new)
     }
 
