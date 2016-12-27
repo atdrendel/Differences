@@ -96,8 +96,12 @@ extension Collection where Iterator.Element == Difference {
     }
 
     public func contains(index: Int) -> Bool {
-        let matching = self.filter { difference in
-            switch difference {
+        return self.position(of: index) != nil
+    }
+
+    public func position(of index: Int) -> Self.Index? {
+        return self.index() { diff in
+            switch diff {
             case .delete(let i):
                 return i == index
             case .update(let i):
@@ -108,6 +112,5 @@ extension Collection where Iterator.Element == Difference {
                 return from == index || to == index
             }
         }
-        return !matching.isEmpty
     }
 }

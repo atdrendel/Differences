@@ -94,4 +94,22 @@ class DifferencesTests: XCTestCase {
         XCTAssertFalse(inserts.contains(index: 3))
         XCTAssertFalse(moves.contains(index: 5))
     }
+
+    func testCollectionPositionOfIndex() {
+        let deletes: Array<Difference> = [.delete(1), .delete(2)]
+        let updates: Array<Difference> = [.update(3), .update(4)]
+        let inserts: Array<Difference> = [.insert(1), .insert(4)]
+        let moves: Array<Difference> = [.move(4, 1), .move(3, 2), .move(3, 2)]
+
+        XCTAssertEqual(0, deletes.position(of: 1))
+        XCTAssertEqual(0, updates.position(of: 3))
+        XCTAssertEqual(1, inserts.position(of: 4))
+        XCTAssertEqual(0, moves.position(of: 1))
+        XCTAssertEqual(1, moves.position(of: 3))
+
+        XCTAssertNil(deletes.position(of: 3))
+        XCTAssertNil(updates.position(of: 1))
+        XCTAssertNil(inserts.position(of: 3))
+        XCTAssertNil(moves.position(of: 5))
+    }
 }

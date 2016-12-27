@@ -3,7 +3,9 @@ public struct Result {
     fileprivate var _oldIdentifierToIndexMap: Dictionary<String, Int>
     fileprivate var _newIdentifierToIndexMap: Dictionary<String, Int>
 
-    public init(differences: Array<Difference>, old: Dictionary<String, Int>, new: Dictionary<String, Int>) {
+    public init(differences: Array<Difference> = [],
+                old: Dictionary<String, Int> = [:],
+                new: Dictionary<String, Int> = [:]) {
         _differences = Set(differences)
         _oldIdentifierToIndexMap = old
         _newIdentifierToIndexMap = new
@@ -55,11 +57,12 @@ public struct Result {
         }
 
         for (identifier, oldIndex) in _oldIdentifierToIndexMap {
-            if updates.contains(index: oldIndex) {
+            if let updateIndex = updates.position(of: oldIndex) {
                 guard let newIndex = _newIdentifierToIndexMap[identifier] else {
                     assertionFailure("Index for \(identifier) should exist in \(_newIdentifierToIndexMap)")
                     continue
                 }
+                updates.remove(at: updateIndex)
                 deletes.append(.delete(oldIndex))
                 inserts.append(.insert(newIndex))
             }
