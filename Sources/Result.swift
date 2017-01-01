@@ -19,6 +19,8 @@ public struct Result {
     public var hasChanges: Bool { return !changes.isEmpty }
     public var count: Int { return _differences.count }
 
+    // The logic for this comes from Instagram's IGListKit.
+    // https://github.com/Instagram/IGListKit/blob/master/Source/Common/IGListIndexSetResult.m#L41
     public var collectionViewDifferences: Array<Difference> {
         var deletes = self.deletes
         var updates = self.updates

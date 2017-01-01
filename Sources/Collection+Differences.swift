@@ -84,6 +84,16 @@ extension Record: CustomStringConvertible {
     }
 }
 
+// This algorithm is inspired by "Isolating Differences Between Files" by Paul Heckel 
+// from Communications of the ACM, April 1978 Volume 21 Number 4.
+// http://dl.acm.org/citation.cfm?id=359467
+//
+// The original algorithm includes five steps, each of which was originally implemented
+// here, too. However, the fourth and fifth steps were redundant after the delete
+// and insert offsets and old and new maps were introduced. That modification of the
+// algorithm was inspired by Instagram's IGListKit library.
+// https://github.com/Instagram/IGListKit
+// https://github.com/Instagram/IGListKit/blob/master/Source/Common/IGListDiff.mm
 public extension Collection where Iterator.Element: Differentiable, Index == Int, IndexDistance == Int {
     private static func differences(from old: Self, to new: Self) -> Differences.Result {
         let oldCount = old.count
