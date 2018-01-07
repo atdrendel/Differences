@@ -18,7 +18,7 @@ extension String {
     }
 
     fileprivate var characterArray: Array<Character> {
-        return self.characters.map { $0 }
+        return self.map { $0 }
     }
 }
 
